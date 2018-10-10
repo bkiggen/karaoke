@@ -29,6 +29,9 @@ $(document).ready(function() {
 
     $("#songForm").submit(function() {
       event.preventDefault();
+      $([document.documentElement, document.body]).animate({
+          scrollTop: $(".lyrics").offset().top
+      }, 2000);
       let trackId = $('input[name="song-name"]:checked').val();
 
 
