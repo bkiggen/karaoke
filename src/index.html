@@ -2,15 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Lyric Lookup</title>
+    <title>Noraebang Machine</title>
   </head>
   <body>
     <div class="container">
       <div class="jumbotron">
-        <h1>Lyric Lookup</h1>
+        <h1>Noraebang Machine</h1>
       </div>
       <form class="searchForm" action="index.html" method="post">
-        <input type="text" name="" value="" placeholder="Search">
+        <label for="artist">Artist</label>
+        <input type="text" name="artist" value="" placeholder="Search">
+        <br>
+        <label for="title">Title</label>
+        <input type="text" name="title" value="" placeholder="Search">
+        <br>
         <button type="submit" name="button" class="btn btn-info">Search</button>
       </form>
       <form id="songForm">

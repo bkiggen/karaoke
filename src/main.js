@@ -8,11 +8,12 @@ $(document).ready(function() {
   $(".searchForm").submit(function() {
     event.preventDefault();
 
-    let userInput = $("input[type='text']").val();
+    let artistInput = $("input[name='artist']").val();
+    let titleInput = $("input[name='title']").val();
     $(".songList").html("");
     // let userInput = 'get back';
     $.ajax({
-      url: `http://api.musixmatch.com/ws/1.1/track.search?q_track=${userInput}&page_size=20&s_track_rating=desc&apikey=d38be6bfc7fe97802dbb8ce0ddde404d`,
+      url: `http://api.musixmatch.com/ws/1.1/track.search?q_track=${titleInput}&q_artist=${artistInput}&page_size=20&s_track_rating=desc&apikey=${process.env.API_KEY}`,
       type: 'GET',
       data: {
         format: 'jsonp',
@@ -24,7 +25,7 @@ $(document).ready(function() {
         for(let i=0; i<response.message.body.track_list.length; i++){
           $(".songList").append(`<li><input type="radio" class='song-title' name="song-name" value="${response.message.body.track_list[i].track.track_id}"> ${response.message.body.track_list[i].track.track_name} - ${response.message.body.track_list[i].track.artist_name}</input></li>`)
         }
-        $("#songButton").html("<button type='submit' name='button'>Show Lyrics</button>");
+        $("#songButton").html("<button type='submit' name='button' class='btn btn-warning'>Show Lyrics</button>");
         // $(".results").text(`${response.message.body.track_list[0].track.lyrics_id}`);
       },
       error: function() {
@@ -37,7 +38,7 @@ $(document).ready(function() {
       let trackId = $('input[name="song-name"]:checked').val();
 
       $.ajax({
-        url: `http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=d38be6bfc7fe97802dbb8ce0ddde404d`,
+        url: `http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${process.env.API_KEY}`,
         type: 'GET',
         data: {
           format: 'jsonp',
@@ -46,7 +47,7 @@ $(document).ready(function() {
         success: function(response) {
           // console.log(response);
           console.log(response.message.body.lyrics.lyrics_body);
-          $(".lyrics").html(`<PRE>${response.message.body.lyrics.lyrics_body}</PRE>`);
+          $(".lyrics").html(`<PRE class="marquee">${response.message.body.lyrics.lyrics_body}</PRE>`);
           // $(".results").text(`${response.message.body.track_list[0].track.lyrics_id}`);
         },
         error: function() {

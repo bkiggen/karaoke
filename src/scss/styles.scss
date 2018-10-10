@@ -7,6 +7,10 @@ PRE {
   font-size: 16px;
 }
 
+.searchForm {
+  margin-bottom: 40px;
+}
+
 .lyrics-background {
   position: relative;
   width: 800px;
@@ -18,10 +22,24 @@ PRE {
 
 .lyrics {
   position: absolute;
-  padding: 5px;
-  top: 145px;
+  padding: 15px;
+  top: 150px;
   left: 145px;
-  border: 1px solid red;
   width: 400px;
-  height: 300px;
+  height: 290px;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.marquee {
+  animation: marquee 60s 1;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+}
+
+@keyframes marquee {
+  100% {
+    transform: translateY(-100%);
+  }
+
 }
